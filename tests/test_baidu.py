@@ -3,10 +3,12 @@ from selenium import webdriver
 import unittest
 import time
 
+# chome_dirver = 'D:\python3\Lib\chromedriver.exe'
+
 
 class Baidu(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(30)
         self.base_url = "http://www.baidu.com/"
 
@@ -25,6 +27,14 @@ class Baidu(unittest.TestCase):
         driver.get(self.base_url + "/gaoji/preferences.html")
         m = driver.find_element_by_xpath(".//*[@id='nr']")
         m.find_element_by_xpath("//option[@value='10']").click()
+
+    def test_11(self):
+        self.driver.get("https://cn.bing.com/?mkt=zh-CN")
+        self.driver.find_element_by_id("id_s")
+        self.driver.find_element_by_css_selector( "body")
+        self.driver.find_element_by_id("sb_form_q").click()
+        self.driver.find_element_by_id("sb_form_q").send_keys("afs")
+        self.driver.find_element_by_css_selector( "#sa_5023 > .sa_tm").click()
 
     def tearDown(self):
         self.driver.quit()
